@@ -1,0 +1,245 @@
+<div>
+    <nav class="navbar sticky-top navbar-expand-lg bg-dark">
+      <div class="container">
+        <a class="navbar-brand" routerLink="/home">PLACEMENTSPORTAL</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <i class="fas fa-bars"></i>
+    </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto w-100 justify-content-end">
+            <li class="nav-item active">
+              <a class="nav-link" routerLink="/home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="!loggedin" class="nav-link" data-bs-toggle="modal" data-bs-target="#form" style="cursor:pointer;">Add Info</a>
+              <a *ngIf="loggedin" class="nav-link" routerLink="/addinfo">Add Info</a>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/contact">Contact</a>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/about">About</a>
+                </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="modal fade" data-bs-backdrop="static" data-bs-dismiss="modal" id="form">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-block mx-auto text-muted text-center">
+                  <h1 *ngIf="lform" >Login</h1>
+                  <h1 *ngIf="sform">Create Your Account</h1>
+                  <h1 *ngIf="forgotpwd">Forgot Password</h1>
+                </div>
+                <div class="close-box" data-bs-dismiss="modal">
+                  <i class="fa fa-times fa-2x"></i>
+                </div>
+            </div>
+            <div class="modal-body mt-3">
+                <form action="" #loginform="ngForm" *ngIf="lform" novalidate>
+                    <div class="form-group m-2 px-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0 rounded-pill">
+                              <i class="fa fa-user text-muted"></i>
+                            </span>
+                          <input type="text" name="rollno" id="rollno" class="px-4 form-control border-start-0 rounded-pill" required [class.is-invalid]="rollno.touched && rollno.invalid"
+                         #rollno="ngModel" ngModel placeholder="University rollno" autocomplete="off">
+                        </div>
+                        <div *ngIf="rollno.errors && rollno.touched" class="mt-3 ms-5">
+                          <small class="alert-danger alert" *ngIf="rollno.errors.required">*Please enter your rollno</small>
+                          </div>
+                          <div *ngIf="invalidrollno" class="mt-3 ms-5">
+                            <small class="alert alert-danger" *ngIf="invalidrollno">*Invalid rollno</small>
+                            </div>
+                    </div><br>
+                    <div class="form-group m-2 px-3">
+                        <div class="input-group">
+                          <span class="input-group-text bg-white border-md border-end-0 rounded-pill">
+                            <i class="fa fa-lock text-muted"></i>
+                          </span>
+                          <input type="password" name="password" id="password" class="px-4 form-control border-start-0 rounded-pill" required [class.is-invalid]="password.touched && password.invalid"
+                          #password="ngModel" ngModel placeholder="password" autocomplete="off">
+                        </div>
+                        <div *ngIf="password.errors && password.touched" class="mt-3 ms-5">
+                          <small class="alert alert-danger" *ngIf="password.errors.required">*Please enter your password</small>
+                      </div>
+                      <div *ngIf="invalidpwd" class="mt-3 ms-5">
+                        <small class="alert alert-danger" *ngIf="invalidpwd">*Invalid passsword</small>
+                    </div>
+                    </div>
+                    <br>
+                    <p class="d-flex justify-content-end text-primary"><a (click)="gotoforgotpwd()" style="cursor:pointer;"><strong>Forgot Password?</strong></a></p>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                      <button class="btn btn-lg btn-primary rounded-pill" (click)="getuser(loginform)" [disabled]="loginform.invalid">Login</button>
+                    </div>
+                    <br>
+                    <p class="text-center text-white">Don't have an account?<a (click)="gotosignupform()" class="text-primary text-decoration-none" style="cursor:pointer;">
+                        <strong> Sign Up</strong></a></p>
+                </form>
+                <form action="" #forgotpwdform="ngForm" *ngIf="forgotpwd" novalidate>
+                    <div class="form-group px-2 m-2">
+                        <div class="input-group">
+                          <span class="input-group-text bg-white rounded-pill border-md border-right-0">
+                            <i class="fa fa-envelope text-muted"></i>
+                        </span>
+                          <input type="text" name="email" id="email" class="form-control rounded-pill px-4" required [class.is-invalid]="email.touched && email.invalid"
+                          #email="ngModel" ngModel autocomplete="off" placeholder="Email">
+                        </div>
+                         <div *ngIf="email.errors && email.touched"  class="mt-3 ms-5">
+                          <small class="alert alert-danger" *ngIf="email.errors.required">*Please enter your email</small>
+                      </div>
+                      <div *ngIf="invalidemail"  class="mt-3 ms-5">
+                        <small class="alert alert-danger" *ngIf="invalidemail">*Invalid email</small>
+                    </div>
+                    </div><br>
+                    <div class="form-group m-2 px-2">
+                        <div class="input-group">
+                          <span class="input-group-text bg-white border-md border-end-0 rounded-pill">
+                            <i class="fa fa-lock text-muted"></i>
+                          </span>
+                          <input type="password" name="password" id="password" class="form-control rounded-pill px-4" minlength="8" required [class.is-invalid]="password.touched && password.invalid"
+                          #password="ngModel" ngModel autocomplete="off" placeholder="New password">
+                        </div>
+                         <div *ngIf="password.errors && password.touched"  class="mt-3 ms-5">
+                            <small class="alert alert-danger" *ngIf="password.errors.required">*Please enter your password</small>
+                            <small class="alert alert-danger" *ngIf="password.errors.minlength">*Please enter a valid password(atleast 8 characters length)</small>
+                        </div>
+                    </div><br>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                      <button class="btn btn-lg btn-primary rounded-pill" (click)="updatepwd(forgotpwdform)" [disabled]="forgotpwdform.invalid">Confirm</button>
+                    </div><br>
+                    <p class="text-center text-white mt-2 px-3"><a (click)="gotologinform()" class="text-primary text-decoration-none" style="cursor:pointer;">
+                      <strong>Login </strong></a> ?Already have an account</p>
+                    <p class="text-center text-white m-3 px-3">Don't have an account?<a (click)="gotosignupform()" class="text-primary text-decoration-none" style="cursor:pointer;">
+                        <strong> Sign Up</strong></a></p>
+                </form>
+                <form action="" #signupform="ngForm" *ngIf="sform">
+                    <div class="form-group m-2 px-2">
+                      <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 rounded-pill">
+                          <i class="fa fa-user text-muted"></i>
+                        </span>
+                        <input type="text" name="name" id="name" class="px-4 form-control rounded-pill" #name="ngModel" required placeholder="Name" autocomplete="off"
+                        [class.is-invalid]="name.touched && name.invalid" ngModel>
+                      </div>
+                        <div *ngIf="name.errors && name.touched" class="mt-3 ms-5">
+                          <small class="alert alert-danger" *ngIf="name.errors.required">*Please enter your name</small>
+                          </div>
+                      </div><br>
+                    <div class="form-group m-2 px-2">
+                      <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 rounded-pill">
+                          <i class="fa fa-graduation-cap text-muted"></i>
+                        </span>
+                        <input type="text" name="rollno" id="rollno" class="px-4 form-control rounded-pill" required [class.is-invalid]="rollno.touched && rollno.invalid"
+                       #rollno="ngModel" ngModel placeholder="University rollno" autocomplete="off">
+                      </div>
+                      <div *ngIf="rollno.errors && rollno.touched" class="mt-3 ms-5">
+                        <small class="alert alert-danger" *ngIf="rollno.errors.required">*Please enter your rollno</small>
+                        </div>
+                        <div *ngIf="invalidrollno" class="mt-3 ms-5">
+                          <small class="alert alert-danger">*Invalid rollno</small>
+                          </div>
+                          <div *ngIf="existingrollno" class="mt-3 ms-5">
+                            <small class="alert alert-danger">*Rollno already exists</small>
+                            </div>
+                  </div><br>
+                    <div class="form-group m-2 px-2">
+                      <div class="input-group">
+                        <span class="input-group-text bg-white rounded-pill border-md border-right-0">
+                          <i class="fa fa-envelope text-muted"></i>
+                      </span>
+                        <input type="email" name="email" id="email" class="px-4 form-control rounded-pill" #email="ngModel" placeholder="Email" autocomplete="off" 
+                        required [class.is-invalid]="email.touched && email.invalid" ngModel pattern="^(\w+)@(\w+)\.(\w)+$">
+                      </div>
+                        <div *ngIf="email.errors && (email.touched)" class="mt-3 ms-5">
+                            <small class="alert alert-danger" *ngIf="email.errors.required">*Please enter your email</small>
+                            <small class="alert alert-danger" *ngIf="email.errors.pattern">*Please enter a valid Email #format(---@---.--)</small>
+                          </div>
+                          <div *ngIf="existingemail" class="mt-3 ms-5">
+                            <small class="alert alert-danger">*Email already exists</small>
+                          </div>
+                    </div><br>
+                    <label class="control-label ms-3" style="color:lightgrey"><Strong> Gender</Strong></label>
+                    <div class="form-check mt-2 mb-2 px-2 form-check-inline">
+                      <input type="radio" name="gender" id="male" class="btn-check" value="male" autocomplete="off" required ngModel #gender="ngModel">
+                      <label class="btn btn-outline-info" for="male">male</label>
+                      <input type="radio" name="gender" id="female" class="btn-check" value="female" autocomplete="off" ngModel #gender="ngModel">
+                      <label for="female" class="btn btn-outline-info">female</label>
+                      <input type="radio" name="gender" id="others" class="btn-check" value="others" autocomplete="off" ngModel #gender="ngModel">
+                      <label for="others" class="btn btn-outline-info">others</label>
+                      <div *ngIf="gender.errors && gender.touched" class="mt-3 ms-5">
+                        <small class="alert alert-danger" *ngIf="gender.errors.required">*Please select your gender</small>
+                    </div>
+                  </div><br><br>
+                    <div class="form-group m-2 px-2">
+                      <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 rounded-pill">
+                          <i class="fa fa-mobile text-muted"></i>
+                        </span>
+                        <input type="tel" name="phone" id="phone" class="form-control rounded-pill px-4" #phone="ngModel" required placeholder="Mobile number" autocomplete="off"
+                        [class.is-invalid]="phone.touched && phone.invalid" ngModel pattern="^\d{10}$">
+                      </div>
+                        <div *ngIf="phone.errors && (phone.touched)" class="mt-3 ms-5">
+                            <small class="alert alert-danger" *ngIf="phone.errors.required">*Please enter your mobile number</small>
+                            <small class="alert alert-danger" *ngIf="phone.errors.pattern">*Please enter a valid mobile number(must be 10 digits)</small>
+                        </div>
+                    </div><br>
+                    <div class="form-group m-2 p-2">
+                      <div class="input-group">
+                          <span class="input-group-text bg-white border-end-0 rounded-pill">
+                            <i class="fa fa-list text-muted"></i>
+                          </span>
+                        <select id="branch" name="branch" class="text-muted px-4 form-control form-select border-md rounded-pill" ngModel
+                        required [class.is-invalid]="branch.touched && branch.errors" #branch="ngModel" >
+                            <option value="">Choose your Branch</option><hr>
+                            <option *ngFor="let branch of branches">{{branch}}</option>
+                        </select>
+                      </div>
+                      <div *ngIf="branch.errors && branch.touched" class="mt-3 ms-5">
+                        <small class="alert alert-danger">*Please select your branch</small>
+                      </div>
+                    </div><br>
+                    <div class="form-group m-2 p-2">
+                      <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 rounded-pill">
+                          <i class="fa fa-university text-muted"></i>
+                        </span>
+                        <select id="college" name="college" class="text-muted px-4 form-control form-select border-md rounded-pill" ngModel
+                        required [class.is-invalid]="college.touched && college.errors" #college="ngModel" >
+                            <option value="" >Choose your College</option><hr>
+                            <option *ngFor="let clg of colleges">{{clg}}</option>
+                        </select>
+                      </div>
+                      <div *ngIf="college.errors && college.touched" class="mt-3 ms-5">
+                        <small class="alert alert-danger">*Please select your College</small>
+                      </div>
+                    </div><br>
+                    <div class="form-group m-2 px-2">
+                      <div class="input-group">
+                        <span class="input-group-text bg-white border-md border-end-0 rounded-pill">
+                          <i class="fa fa-lock text-muted"></i>
+                        </span>
+                        <input type="password" name="password" id="password" class="px-4 form-control rounded-pill" required [class.is-invalid]="password.touched && password.invalid"
+                        #password="ngModel" ngModel minlength="8" placeholder="Password" autocomplete="off">
+                      </div>
+                         <!-- <small class="alert alert-danger" [class.d-none]="password.untouched || password.valid">*Please enter your password</small> -->
+                        <div *ngIf="password.errors && password.touched" class="mt-3 ms-5">
+                            <small class="alert alert-danger" *ngIf="password.errors.required">*Please enter your password</small>
+                            <small class="alert alert-danger" *ngIf="password.errors.minlength">*Please enter a valid password(atleast 8 characters length)</small>
+                        </div>
+                    </div>
+                    <br>
+                  <div class="mt-2 d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-lg btn-primary m-2 rounded-pill" (click)="createacc(signupform)" [disabled]="signupform.invalid">Sign Up</button>
+                  </div>
+                    <br>
+                    <p class="text-center text-white">Already have an account?<a (click)="gotologinform()" class="text-primary text-decoration-none" style="cursor:pointer;">
+                        <strong> Login</strong></a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>

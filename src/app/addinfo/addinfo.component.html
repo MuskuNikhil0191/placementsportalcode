@@ -1,0 +1,85 @@
+<div>
+    <nav class="navbar sticky-top bg-dark">
+      <div class="container">
+        <a class="navbar-brand" routerLink="/home">PLACEMENTSPORTAL</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="text-light"><i class="fas fa-user-circle" height="20px"></i></span>
+    </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto w-100 justify-content-end">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/addinfo">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/contact">Contact</a>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/home">Back to Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="logout()" routerLink="/home"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a>
+                  </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://static.vecteezy.com/system/resources/previews/001/209/031/original/graduation-hat-png.png" alt=""/>
+            <h3>Welcome</h3>
+            <h2>{{name}}</h2>
+            <p>Please Share your Interview Experience!</p>
+        </div>
+        <div class="col-md-9 register-right">
+            <h1 class="text-center text-secondary display-4 mt-4 mb-0 text-decoration-underline">Interview Expererience</h1>
+            <div class="row register-form">
+                    <form action="" #desc="ngForm">
+                        <div class="form-group">
+                            <input type="text" name="companyname" id="name" class="px-2 form-control" autocomplete="off" #name="ngModel" required 
+                            placeholder="Company Name" [class.is-invalid]="name.touched && name.invalid" ngModel>
+                            <div class="alert alert-danger" [class.d-none]="name.valid || name.untouched">*Please enter the Company name</div>
+                        </div><br>
+                        <div class="form-group">
+                            <input type="text" name="role" id="role" class="px-2 form-control" autocomplete="off" #role="ngModel" 
+                            placeholder="Role" required [class.is-invalid]="role.touched && role.invalid" ngModel>
+                            <div class="alert alert-danger" [class.d-none]="role.valid || role.untouched">*Please enter the Role</div>
+                        </div><br>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="package" name="package" id="package" class="px-2 form-control" autocomplete="off" #package="ngModel" placeholder="Package"
+                                required [class.is-invalid]="package.touched && package.invalid" ngModel pattern="^\d">
+                                <div class="input-group-text">LPA</div>
+                            </div>
+                            <div *ngIf="package.errors && (package.touched)">
+                                <div class="alert alert-danger" *ngIf="package.errors.required">*Please enter the Package</div>
+                                <div class="alert alert-danger" *ngIf="package.errors.pattern">*Please enter Package in numbers</div>
+                            </div>
+                        </div><br>
+                        <label for="skills" class="text-secondary"><strong>Skills</strong></label>
+                        <div class="check">
+                            <div class="check1" *ngFor="let x of skills">
+                                <input type="checkbox" name="{{x.name}}" class="btn-check" id="{{x.name}}" autocomplete="off" #skill="ngModel" ngModel [(ngModel)]="x.isselected">
+                                <label class="btn btn-sm btn-outline-secondary" for="{{x.name}}">{{x.name}}</label>
+                                <div *ngIf="skill.errors && (skill.touched)">
+                                    <div class="alert alert-danger" *ngIf="skill.errors.required">*Please select the required Skills</div>
+                                </div>
+                            </div><br>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Interview Experience" class="px-2 form-control" autocomplete="off" cols="30" rows="10"
+                            name="interviewexperience" ngModel #exp="ngModel" required></textarea>
+                            <div *ngIf="exp.errors && (exp.touched)">
+                                <div class="alert alert-danger" *ngIf="exp.errors.required">*Please enter your Interview Experience</div>
+                            </div>
+                        </div><br>
+                        <button class="btn btn-lg btn-primary btnRegister" (click)="onsubmit(desc)" [disabled]="desc.invalid">Submit</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>				                            

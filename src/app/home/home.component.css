@@ -1,0 +1,177 @@
+
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web");
+* {
+  font-family: "Titillium Web", sans-serif;
+}
+body {
+  height: 2000px;
+}
+.navbar .navbar-brand {
+  font-size: 30px;
+}
+.navbar .nav-item {
+  padding: 10px 20px;
+}
+.navbar .nav-link {
+  font-size: 20px;
+  margin-left: 10px;
+}
+.fa-bars {
+  color: #007bff;
+  font-size: 30px;
+}
+.nav-link:hover{
+    border: 2px white solid;
+    transition: 0.2s;
+    color: white;
+}
+.form-icon{
+	text-align: center;
+    background-color: #5891ff;
+    border-radius: 50%;
+    font-size: 40px;
+    color: white;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 50px;
+    line-height: 100px;
+}
+  .close-box{
+      height: 50px;
+      width: 50px;
+      background: #f00;
+      color: #f2f3f5;
+      margin: 0 auto;
+      position: absolute;
+      right:1%;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .modal{
+      background:radial-gradient(black,#222D32);
+    }
+    .modal-content {
+      background: #222D32;
+      font-family: 'Roboto', sans-serif;
+  }
+.logo-badge{
+  height:100px;
+  width:100px;
+}
+
+.filter-block{
+    background-color:lightblue;
+    padding:30px;
+}
+.portfolio-grid,.company-cards {
+    margin-top: 50px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 300px;
+  }
+  @media (max-width: 768px) {
+    .portfolio-grid,.company-cards {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  @media only screen and (min-width: 768.1px) and (max-width: 991px) {
+    .portfolio-grid,.company-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }		
+    }
+  .portfolio-grid .portfolio {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -o-box-sizing: border-box;
+      display:none;
+      overflow:hidden;
+  }
+  .portfolio-wrapper {
+    overflow:hidden;
+    position: relative !important;
+    cursor:pointer;
+  }
+  .portfolio-bg {
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    transition: 1s;
+    transform: scale(1)
+  }
+  .portfolio:hover .portfolio-bg{
+    transform: scale(1.2)
+  }
+  .first .portfolio-bg{
+    background-image: url('https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?cs=srgb&dl=accounts-applications-apps-267350.jpg&fm=jpg');
+  }
+  .second .portfolio-bg{
+    background-image: url('https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg?cs=srgb&dl=art-art-materials-artwork-1053687.jpg&fm=jpg');
+  }
+  .third .portfolio-bg{
+    background-image: url('https://images.pexels.com/photos/6224/hands-people-woman-working.jpg?cs=srgb&dl=brainstorming-campaign-collaborate-6224.jpg&fm=jpg');
+  }
+  .portfolio .label {
+    position: absolute;
+    width: 100%;
+    height:100%;
+    bottom: 0;
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden
+  }
+  
+  .portfolio .label-bg {
+    background: #232323;
+    opacity: 0.7;
+    width: 100%;
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
+    transition: 1px;
+  }
+  .portfolio .label-text {
+    color:#fff;
+    position: relative;
+    z-index:500;
+    padding:50px 20px;
+  }
+  .portfolio:hover .label {
+    opacity: 1;
+    visibility: visible;
+  }
+  .portfolio .text-category {
+    display:block;
+  }
+  .portfolio .template-btn {
+    background: #e30b5d;
+    border: 1px solid #e30b5d;
+    text-decoration: none;
+    margin-top: 20px;
+    font-weight: 500
+  }
+  .template-btn {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 12px 20px;
+    display: inline-block;
+    background: transparent;
+    cursor: pointer;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+  }
+  .template-btn:hover {
+    color: white;
+    background: #f28500;
+  }

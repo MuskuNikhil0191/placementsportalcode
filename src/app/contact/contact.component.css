@@ -1,0 +1,50 @@
+
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web");
+* {
+  font-family: "Titillium Web", sans-serif;
+}
+body {
+  height: 2000px;
+}
+.navbar .navbar-brand {
+  font-size: 30px;
+}
+.navbar .nav-item {
+  padding: 10px 20px;
+}
+.navbar .nav-link {
+  font-size: 20px;
+  margin-left: 10px;
+}
+.fa-bars {
+  color: #007bff;
+  font-size: 30px;
+}
+.nav-link:hover{
+    border: 2px white solid;
+    transition: 0.2s;
+    color: white;
+}
+
+.close-box{
+    height: 50px;
+    width: 50px;
+    background: #f00;
+    color: #f2f3f5;
+    margin: 0 auto;
+    position: absolute;
+    right:1%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .modal{
+    background:radial-gradient(black,#222D32);
+  }
+  .modal-content {
+    background: #222D32;
+    font-family: 'Roboto', sans-serif;
+}
