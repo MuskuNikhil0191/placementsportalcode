@@ -3,7 +3,7 @@
       <div class="container">
         <a class="navbar-brand" routerLink="/home">PLACEMENTSPORTAL</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-     <span class="text-light"><i class="fas fa-user-circle" height="20px"></i></span>
+     <i class="fas fa-user-circle text-light"></i>
     </button>
     
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -20,7 +20,10 @@
                     <a class="nav-link" routerLink="/home">Back to Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" (click)="logout()" routerLink="/home"><i class="fa fa-sign-in" aria-hidden="true"></i>Logout</a>
+                    <a class="nav-link" (click)="logout()" routerLink="/home">Logout <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                      </svg></a>
                   </li>
           </ul>
         </div>
@@ -36,9 +39,12 @@
             <p>Please Share your Interview Experience!</p>
         </div>
         <div class="col-md-9 register-right">
-            <h1 class="text-center text-secondary display-4 mt-4 mb-0 text-decoration-underline">Interview Expererience</h1>
+            <h1 *ngIf="iexp" class="text-center text-secondary display-4 mt-4 mb-0 text-decoration-underline">Interview Expererience</h1>
+            <div *ngIf="!iexp" class="mt-4 mb-0">
+                <img class="d-block mx-auto smily" src="https://www.freeiconspng.com/thumbs/smile-png/best-smile-png-clipart-26.png" style="height:30%;width:30%" alt="/smile">
+            </div>
             <div class="row register-form">
-                    <form action="" #desc="ngForm">
+                    <form *ngIf="iexp" action="" #desc="ngForm">
                         <div class="form-group">
                             <input type="text" name="companyname" id="name" class="px-2 form-control" autocomplete="off" #name="ngModel" required 
                             placeholder="Company Name" [class.is-invalid]="name.touched && name.invalid" ngModel>
@@ -52,7 +58,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="package" name="package" id="package" class="px-2 form-control" autocomplete="off" #package="ngModel" placeholder="Package"
-                                required [class.is-invalid]="package.touched && package.invalid" ngModel pattern="^\d">
+                                required [class.is-invalid]="package.touched && package.invalid" ngModel pattern="[+-]?([0-9]*[.])?[0-9]+">
                                 <div class="input-group-text">LPA</div>
                             </div>
                             <div *ngIf="package.errors && (package.touched)">
@@ -79,6 +85,11 @@
                         </div><br>
                         <button class="btn btn-lg btn-primary btnRegister" (click)="onsubmit(desc)" [disabled]="desc.invalid">Submit</button>
                     </form>
+                    <div *ngIf="!iexp">
+                        <h1 class="text-center text-success">Yahh!</h1><br>
+                        <h2 class="text-center text-muted">Successfully submitted your<br><br>Interview Experience</h2><br><br>
+                        <button class="btn btn-lg btn-primary rounded-pill d-block mx-auto" (click)="anotherresponse()">Add another Interview Experience</button>
+                    </div>
                 </div>
         </div>
     </div>

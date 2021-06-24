@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,11 +22,12 @@ export class HomeComponent implements OnInit {
   loggedin=false;
   colleges=['VNRVJIET','CBIT','GRIET','JNTU'];
   branches=['CSE','IT','MECH','EIE','CIVIL','ECE','EEE'];
-  sampledata:any
   ngOnInit(): void {
-    this.sampledata=this.ds.getdata();
-    console.log(this.sampledata);
-    this.ds.data=this.sampledata;
+    this.ds.data=this.ds.getdata().subscribe(
+      (res)=>{console.log(res)},
+      (err)=>{console.log(err)}
+    );
+    console.log(this.ds.data);
     if(this.ds.users.length>0){
       this.loggedin=true;
     }
@@ -137,6 +137,10 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl("/pagenotfound",{skipLocationChange:true}).then(()=>{
       this.router.navigate([decodeURI(this.location.path())]);
     });
+  }
+  gotohome(){
+    this.ds.users.splice(0,this.ds.users.length);
+    this.reloadComponent();
   }
   gotoaddinfo(){
     this.router.navigateByUrl("/addinfo").then(

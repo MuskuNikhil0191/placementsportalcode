@@ -135,6 +135,11 @@ export class ContactComponent implements OnInit {
       this.router.navigate([decodeURI(this.location.path())]);
     });
   }
+  gotohome(){
+    this.router.navigateByUrl("/home").then(
+      ()=>{this.router.navigate([decodeURI(this.location.path())])}
+    );
+  }
   gotoaddinfo(){
     this.router.navigateByUrl("/addinfo").then(
       ()=>{this.router.navigate([decodeURI(this.location.path())])}

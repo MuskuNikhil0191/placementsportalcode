@@ -31,17 +31,21 @@ export class AddinfoComponent implements OnInit {
   ]
   skillsrequired:any;
   temp:any;
+  iexp=true;
   constructor(private ds:DataService,private router:Router,private location:Location) { }
-  name=this.ds.users.name;
+  name=this.ds.users[0].name;
   onsubmit(data:any){
+    this.iexp=false;
     this.skillsrequired=this.skills.filter(x=>x.isselected==true).map(x=>x.name).join(",").toString();
     data=data.value;
-    this.temp={rollno:this.ds.users.rollno,companyname:data.companyname,role:data.role,package:data.package,skills:this.skillsrequired,interviewexperience:data.interviewexperience};
-    console.log(this.temp);
-    this.ds.addinfo(data.value).subscribe(
+    this.temp={rollno:this.ds.users[0].rollno,companyname:data.companyname,role:data.role,package:data.package,skills:this.skillsrequired,interviewexperience:data.interviewexperience};
+    this.ds.addinfo(this.temp).subscribe(
        (res)=>{console.log(res)},
        (err)=>{console.log(err)}
      );
+  }
+  anotherresponse(){
+    this.iexp=true;
   }
   ngOnInit(): void {
     if(this.ds.users.length==0){

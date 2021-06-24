@@ -16,6 +16,17 @@ body {
   font-size: 20px;
   margin-left: 10px;
 }
+.form-icon{
+	text-align: center;
+    background-color: #5891ff;
+    border-radius: 50%;
+    font-size: 40px;
+    color: white;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    line-height: 100px;
+}
 .fa-bars {
   color: #007bff;
   font-size: 30px;
@@ -33,6 +44,7 @@ body {
     color: #f2f3f5;
     margin: 0 auto;
     position: absolute;
+    top:2%;
     right:1%;
     border-radius: 50%;
     display: flex;

@@ -3,6 +3,9 @@
 * {
   font-family: "Titillium Web", sans-serif;
 }
+.fa-user-circle{
+    font-size:30px;
+}
 .check{
     display:flex;
     flex-wrap:wrap;

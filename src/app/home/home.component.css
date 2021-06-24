@@ -34,7 +34,6 @@ body {
     width: 100px;
     height: 100px;
     margin: auto;
-    margin-bottom: 50px;
     line-height: 100px;
 }
   .close-box{
@@ -44,6 +43,7 @@ body {
       color: #f2f3f5;
       margin: 0 auto;
       position: absolute;
+      top:2%;
       right:1%;
       border-radius: 50%;
       display: flex;

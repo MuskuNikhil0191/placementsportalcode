@@ -13,11 +13,17 @@
           </li>
           <li class="nav-item">
             <a *ngIf="!loggedin" class="nav-link" data-bs-toggle="modal" data-bs-target="#form" style="cursor:pointer">Add Info</a>
-            <a *ngIf="loggedin" class="nav-link" routerLink="/addinfo">Add Info</a>
+            <a *ngIf="loggedin" class="nav-link" routerLink="/addinfo">Account</a>
             <li class="nav-item">
               <a class="nav-link" routerLink="/contact">Contact</a>
               <li class="nav-item">
                 <a class="nav-link" routerLink="/about">About</a>
+              </li>
+              <li *ngIf="loggedin" class="nav-item">
+                <a class="nav-link" (click)="gotohome()" style="cursor:pointer;">Logout <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                  <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg></a>
               </li>
         </ul>
       </div>
@@ -30,14 +36,14 @@
           <div class="form-icon">
               <i class="fa fa-user"></i>
           </div>
+          <div class="close-box" data-bs-dismiss="modal">
+            <i class="fa fa-times fa-2x"></i>
+          </div>
           <div class="modal-header">
               <div class="d-block mx-auto text-muted text-center">
                 <h1 *ngIf="lform" >Login</h1>
                 <h1 *ngIf="sform">Create Your Account</h1>
                 <h1 *ngIf="forgotpwd">Forgot Password</h1>
-              </div>
-              <div class="close-box" data-bs-dismiss="modal">
-                <i class="fa fa-times fa-2x"></i>
               </div>
           </div>
           <div class="modal-body mt-3">
